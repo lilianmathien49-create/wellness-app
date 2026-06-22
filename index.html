@@ -5,115 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wellness Pro - Angers SCO</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #667eea;
-            --primary-dark: #5568d3;
-            --secondary: #764ba2;
-            --success: #4CAF50;
-            --error: #f44336;
-            --warning: #ff9800;
-            --light: #f8f9fa;
-            --border: #e9ecef;
-            --text: #2d3748;
-            --text-secondary: #718096;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: var(--text);
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
+            font-size: 20px;
+            font-weight: 600;
             letter-spacing: -0.5px;
         }
 
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
+        .header-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .info-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            transition: all 0.2s;
+            border: 1.5px solid #e9ecef;
+        }
+
+        .info-btn:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px 30px;
         }
 
         .form-wrapper {
-            padding: 30px;
+            padding: 0;
         }
 
         .form-section {
-            margin-bottom: 35px;
-        }
-
-        .form-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .section-icon {
-            font-size: 24px;
+            background: white;
+            padding: 24px;
+            margin-top: 12px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
         }
 
         .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
+            margin-bottom: 8px;
+            font-weight: 500;
             font-size: 14px;
-            color: var(--text);
+            color: #1a1a1a;
         }
 
         select, input[type="text"], input[type="number"], input[type="time"], textarea {
             width: 100%;
-            padding: 12px 14px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 10px 12px;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
             font-family: inherit;
             transition: all 0.2s;
             background: white;
@@ -121,28 +118,24 @@
 
         select:focus, input:focus, textarea:focus {
             outline: none;
-            border-color: var(--primary);
-            background: #f0f4ff;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
         }
 
-        .slider-group {
-            background: var(--light);
-            padding: 16px;
-            border-radius: 10px;
-        }
-
-        .slider-row {
+        .slider-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
             display: flex;
-            align-items: center;
             gap: 12px;
+            align-items: center;
         }
 
         input[type="range"] {
             flex: 1;
-            height: 6px;
-            border-radius: 3px;
-            background: #ddd;
+            height: 4px;
+            border-radius: 2px;
+            background: #e9ecef;
             outline: none;
             -webkit-appearance: none;
             appearance: none;
@@ -151,99 +144,80 @@
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 26px;
-            height: 26px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            background: var(--primary);
+            background: #667eea;
             cursor: pointer;
-            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 1px 4px rgba(102, 126, 234, 0.3);
         }
 
         input[type="range"]::-moz-range-thumb {
-            width: 26px;
-            height: 26px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            background: var(--primary);
+            background: #667eea;
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 1px 4px rgba(102, 126, 234, 0.3);
         }
 
         .slider-value {
-            min-width: 50px;
+            min-width: 35px;
             text-align: center;
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 20px;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 16px;
         }
 
-        .bodymap-wrapper {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .bodymap-tabs {
+        .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 10px;
-            border: 2px solid var(--border);
+            padding: 9px;
+            border: 1px solid #e9ecef;
             background: white;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
             transition: all 0.2s;
-            font-size: 14px;
         }
 
         .tab-btn.active {
-            background: var(--primary);
+            background: #667eea;
             color: white;
-            border-color: var(--primary);
+            border-color: #667eea;
         }
 
-        .bodymap-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        svg.bodymap {
-            width: 150px;
-            height: 280px;
+        .bodymap {
+            width: 100px;
+            height: 160px;
+            margin: 20px auto;
+            display: block;
         }
 
         .body-part {
             cursor: pointer;
             transition: all 0.2s;
-            stroke-width: 2;
-            stroke: #999;
-            fill-opacity: 0.85;
+            stroke-width: 1.5;
+            stroke: #ccc;
         }
 
         .body-part:hover {
-            stroke: var(--primary);
-            stroke-width: 3;
-            filter: brightness(0.95);
+            filter: brightness(0.92);
+            stroke: #667eea;
+            stroke-width: 2;
         }
 
         .body-part.selected {
-            stroke: var(--primary);
-            stroke-width: 3;
             filter: brightness(0.85);
-        }
-
-        .bodymap-legend {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-top: 10px;
+            stroke: #667eea;
+            stroke-width: 2;
         }
 
         .pain-list {
@@ -254,31 +228,153 @@
         }
 
         .pain-item {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px;
-            border-radius: 6px;
+            background: #f0f4ff;
+            border-left: 3px solid #667eea;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 13px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .pain-text {
+            flex: 1;
         }
 
         .pain-location {
             font-weight: 600;
-            color: var(--text);
+            color: #1a1a1a;
         }
 
         .pain-comment {
-            color: var(--text-secondary);
             font-size: 12px;
+            color: #666;
+            margin-top: 2px;
         }
 
         .pain-remove {
             cursor: pointer;
-            color: #d39e00;
-            font-weight: bold;
-            margin-left: 10px;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .urine-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .urine-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .urine-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .urine-circle:hover {
+            transform: scale(1.08);
+        }
+
+        .urine-circle.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .urine-label {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e9ecef;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+
+        .toggle-option.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 0;
+        }
+
+        button[type="submit"],
+        button[type="reset"] {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button[type="submit"] {
+            background: #667eea;
+            color: white;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        button[type="reset"] {
+            background: #f8f9fa;
+            color: #1a1a1a;
+            border: 1px solid #e9ecef;
+        }
+
+        .status {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
         }
 
         .modal {
@@ -288,7 +384,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -301,46 +397,42 @@
 
         .modal-content {
             background: white;
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 8px;
+            padding: 24px;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
+            max-width: 380px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .modal-header {
+            margin-bottom: 16px;
         }
 
         .modal-header h3 {
-            font-size: 20px;
-            color: var(--text);
-            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .modal-part {
-            font-size: 14px;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-size: 13px;
+            color: #667eea;
+            font-weight: 500;
         }
 
         .modal-body {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+
+        .modal-body label {
+            margin-bottom: 6px;
         }
 
         .modal-body textarea {
             resize: vertical;
-            min-height: 100px;
-            margin-bottom: 15px;
+            min-height: 70px;
+            margin-top: 8px;
         }
 
         .intensity-options {
@@ -351,19 +443,19 @@
 
         .intensity-btn {
             flex: 1;
-            padding: 10px;
-            border: 2px solid var(--border);
+            padding: 8px;
+            border: 1px solid #e9ecef;
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 12px;
             transition: all 0.2s;
         }
 
         .intensity-btn.active {
-            background: var(--warning);
-            border-color: var(--warning);
+            background: #ff9800;
+            border-color: #ff9800;
             color: white;
         }
 
@@ -374,395 +466,245 @@
 
         .modal-footer button {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .btn-confirm {
-            background: var(--success);
+            background: #667eea;
             color: white;
         }
 
         .btn-cancel {
-            background: var(--light);
-            color: var(--text);
-            border: 2px solid var(--border);
+            background: #f8f9fa;
+            color: #1a1a1a;
+            border: 1px solid #e9ecef;
         }
 
-        .urine-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-top: 12px;
+        .instructions-modal .modal-content {
+            max-width: 450px;
         }
 
-        .urine-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+        .instructions-list {
+            margin-top: 16px;
         }
 
-        .urine-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.2s;
+        .instruction-item {
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #333;
         }
 
-        .urine-circle:hover {
-            transform: scale(1.1);
+        .instruction-item strong {
+            color: #667eea;
         }
 
-        .urine-circle.selected {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-        }
-
-        .urine-label {
-            text-align: center;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .toggle-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .toggle-option {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid var(--border);
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .toggle-option.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 35px;
-            padding-top: 20px;
-            border-top: 2px solid var(--border);
-        }
-
-        button[type="submit"],
-        button[type="reset"] {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        button[type="submit"] {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-        }
-
-        button[type="reset"] {
-            background: var(--light);
-            color: var(--text);
-            border: 2px solid var(--border);
-        }
-
-        .status {
-            margin-top: 20px;
-            padding: 16px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 600;
-            display: none;
-        }
-
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-            display: block;
-        }
-
-        .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            display: block;
-        }
-
-        .timestamp {
-            color: var(--text-secondary);
-            font-size: 12px;
-            text-align: center;
-            margin-top: 12px;
-        }
-
-        @media (max-width: 600px) {
-            .form-wrapper {
-                padding: 20px;
-            }
-            .header {
-                padding: 30px 20px;
-            }
-            .header h1 {
-                font-size: 26px;
-            }
+        @media (max-width: 500px) {
+            .header { padding: 16px; }
+            .header h1 { font-size: 18px; }
+            .form-section { padding: 16px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <h1>Wellness Pro</h1>
-                <p>Angers SCO • Suivi santé et récupération</p>
-            </div>
-
-            <form id="wellnessForm" class="form-wrapper">
-                <!-- JOUEUR -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <span class="section-icon">👤</span>
-                        <span class="section-title">Athlète</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="player">Sélectionne un joueur</label>
-                        <select id="player" required>
-                            <option value="">-- Choisir --</option>
-                            <option value="1">Anthony Lopes</option>
-                            <option value="2">Carlens Arcus</option>
-                            <option value="3">Jordan Lefort</option>
-                            <option value="4">Jacques Ekomié</option>
-                            <option value="5">Ousmane Camara</option>
-                            <option value="6">Emmanuel Biumla</option>
-                            <option value="7">Lilian Raolisoa</option>
-                            <option value="8">Haris Belkebla</option>
-                            <option value="9">Yassin Belkhdim</option>
-                            <option value="10">Louis Mouton</option>
-                            <option value="11">Dan Sinaté</option>
-                            <option value="12">Marius Louër</option>
-                            <option value="13">Amine Sbaï</option>
-                            <option value="14">Peter Prosper</option>
-                            <option value="15">Lanroy Machine</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- ÉTAT PHYSIQUE -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <span class="section-icon">⚡</span>
-                        <span class="section-title">État Physique</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Niveau de Fatigue</label>
-                        <div class="slider-group">
-                            <div class="slider-row">
-                                <input type="range" id="fatigue" min="0" max="10" value="5">
-                                <span class="slider-value" id="fatigueValue">5</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Niveau de Stress</label>
-                        <div class="slider-group">
-                            <div class="slider-row">
-                                <input type="range" id="stress" min="0" max="10" value="5">
-                                <span class="slider-value" id="stressValue">5</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Courbatures</label>
-                        <div class="slider-group">
-                            <div class="slider-row">
-                                <input type="range" id="soreness" min="0" max="10" value="5">
-                                <span class="slider-value" id="sorenessValue">5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DOULEURS -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <span class="section-icon">🔴</span>
-                        <span class="section-title">Douleurs Physiques</span>
-                    </div>
-
-                    <div class="bodymap-wrapper">
-                        <div class="bodymap-tabs">
-                            <button type="button" class="tab-btn active" data-view="front">Face</button>
-                            <button type="button" class="tab-btn" data-view="back">Dos</button>
-                        </div>
-
-                        <div class="bodymap-container">
-                            <svg id="bodymapFront" class="bodymap" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg">
-                                <circle class="body-part" data-part="Tête" cx="50" cy="18" r="14" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Cou" x="45" y="34" width="10" height="12" fill="#e3f2fd" stroke="#667eea"/>
-                                <ellipse class="body-part" data-part="Épaule Gauche" cx="30" cy="50" rx="10" ry="12" fill="#e3f2fd" stroke="#667eea"/>
-                                <ellipse class="body-part" data-part="Épaule Droite" cx="70" cy="50" rx="10" ry="12" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Bras Gauche" x="18" y="52" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Bras Droit" x="72" y="52" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Avant-Bras Gauche" x="16" y="92" width="8" height="30" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Avant-Bras Droit" x="76" y="92" width="8" height="30" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Torse" x="38" y="50" width="24" height="35" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Abdomen" x="38" y="85" width="24" height="30" fill="#e3f2fd" stroke="#667eea"/>
-                                <ellipse class="body-part" data-part="Hanche" cx="50" cy="118" rx="18" ry="10" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Cuisse Gauche" x="35" y="130" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Cuisse Droite" x="55" y="130" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Jambe Gauche" x="35" y="170" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Jambe Droite" x="55" y="170" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Pied Gauche" x="33" y="210" width="14" height="10" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Pied Droit" x="53" y="210" width="14" height="10" fill="#e3f2fd" stroke="#667eea"/>
-                            </svg>
-
-                            <svg id="bodymapBack" class="bodymap" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                                <circle class="body-part" data-part="Arrière Tête" cx="50" cy="18" r="14" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Cou Arrière" x="45" y="34" width="10" height="12" fill="#e3f2fd" stroke="#667eea"/>
-                                <polygon class="body-part" data-part="Trapèze Gauche" points="30,48 20,70 35,70" fill="#e3f2fd" stroke="#667eea"/>
-                                <polygon class="body-part" data-part="Trapèze Droit" points="70,48 80,70 65,70" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Bras Gauche Arrière" x="18" y="52" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Bras Droit Arrière" x="72" y="52" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Haut du Dos" x="38" y="50" width="24" height="20" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Milieu du Dos" x="38" y="70" width="24" height="20" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Bas du Dos" x="38" y="90" width="24" height="20" fill="#e3f2fd" stroke="#667eea"/>
-                                <ellipse class="body-part" data-part="Fessier Gauche" cx="38" cy="120" rx="9" ry="12" fill="#e3f2fd" stroke="#667eea"/>
-                                <ellipse class="body-part" data-part="Fessier Droit" cx="62" cy="120" rx="9" ry="12" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Mollet Gauche" x="35" y="170" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Mollet Droit" x="55" y="170" width="10" height="40" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Talon Gauche" x="33" y="210" width="14" height="10" fill="#e3f2fd" stroke="#667eea"/>
-                                <rect class="body-part" data-part="Talon Droit" x="53" y="210" width="14" height="10" fill="#e3f2fd" stroke="#667eea"/>
-                            </svg>
-                        </div>
-                        <div class="bodymap-legend">Clique sur les zones douloureuses</div>
-                    </div>
-
-                    <div class="pain-list" id="painList"></div>
-                </div>
-
-                <!-- SOMMEIL -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <span class="section-icon">😴</span>
-                        <span class="section-title">Sommeil</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bedtime">Heure de couché</label>
-                        <input type="time" id="bedtime" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sleep">Durée de sommeil (heures)</label>
-                        <input type="number" id="sleep" min="0" max="12" step="0.5" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Qualité du Sommeil</label>
-                        <div class="slider-group">
-                            <div class="slider-row">
-                                <input type="range" id="sleepQuality" min="0" max="10" value="5">
-                                <span class="slider-value" id="sleepQualityValue">5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HYDRATATION -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <span class="section-icon">💧</span>
-                        <span class="section-title">Hydratation</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Couleur des urines</label>
-                        <div class="urine-grid">
-                            <div class="urine-option">
-                                <div class="urine-circle" data-urine="Incolore" style="background-color: #FFFFFF; border: 2px solid #ddd;"></div>
-                                <div class="urine-label">Blanc</div>
-                            </div>
-                            <div class="urine-option">
-                                <div class="urine-circle" data-urine="Pâle" style="background-color: #FFFACD;"></div>
-                                <div class="urine-label">Pâle</div>
-                            </div>
-                            <div class="urine-option">
-                                <div class="urine-circle" data-urine="Jaune" style="background-color: #FFEB3B;"></div>
-                                <div class="urine-label">Jaune</div>
-                            </div>
-                            <div class="urine-option">
-                                <div class="urine-circle" data-urine="Jaune Foncé" style="background-color: #FFA500;"></div>
-                                <div class="urine-label">Foncé</div>
-                            </div>
-                            <div class="urine-option">
-                                <div class="urine-circle" data-urine="Très Foncé" style="background-color: #CC8800;"></div>
-                                <div class="urine-label">Très Foncé</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Avez-vous soif en ce moment ?</label>
-                        <div class="toggle-group">
-                            <button type="button" class="toggle-option" data-thirst="non" id="thirstNo">Non</button>
-                            <button type="button" class="toggle-option" data-thirst="oui" id="thirstYes">Oui</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button-group">
-                    <button type="submit">✓ Envoyer</button>
-                    <button type="reset">↻ Réinitialiser</button>
-                </div>
-
-                <div class="status" id="status"></div>
-                <div class="timestamp" id="timestamp"></div>
-            </form>
+    <div class="header">
+        <div>
+            <h1>Wellness Pro</h1>
+            <div class="header-info">Angers SCO</div>
         </div>
+        <button class="info-btn" id="infoBtn" title="Instructions">ⓘ</button>
     </div>
 
-    <!-- MODAL -->
+    <div class="container">
+        <form id="form">
+            <!-- Joueur -->
+            <div class="form-section">
+                <div class="section-title">Athlète</div>
+                <div class="form-group">
+                    <label for="player">Joueur</label>
+                    <select id="player" required>
+                        <option value="">Choisir...</option>
+                        <option value="1">Anthony Lopes</option>
+                        <option value="2">Carlens Arcus</option>
+                        <option value="3">Jordan Lefort</option>
+                        <option value="4">Jacques Ekomié</option>
+                        <option value="5">Ousmane Camara</option>
+                        <option value="6">Emmanuel Biumla</option>
+                        <option value="7">Lilian Raolisoa</option>
+                        <option value="8">Haris Belkebla</option>
+                        <option value="9">Yassin Belkhdim</option>
+                        <option value="10">Louis Mouton</option>
+                        <option value="11">Dan Sinaté</option>
+                        <option value="12">Marius Louër</option>
+                        <option value="13">Amine Sbaï</option>
+                        <option value="14">Peter Prosper</option>
+                        <option value="15">Lanroy Machine</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- État -->
+            <div class="form-section">
+                <div class="section-title">État Physique</div>
+                <div class="form-group">
+                    <label>Fatigue</label>
+                    <div class="slider-box">
+                        <input type="range" id="fatigue" min="0" max="10" value="5">
+                        <span class="slider-value" id="fatigueVal">5</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Stress</label>
+                    <div class="slider-box">
+                        <input type="range" id="stress" min="0" max="10" value="5">
+                        <span class="slider-value" id="stressVal">5</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Courbatures</label>
+                    <div class="slider-box">
+                        <input type="range" id="soreness" min="0" max="10" value="5">
+                        <span class="slider-value" id="sorenessVal">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Douleurs -->
+            <div class="form-section">
+                <div class="section-title">Douleurs Physiques</div>
+                <div class="tabs">
+                    <button type="button" class="tab-btn active" data-view="front">Face</button>
+                    <button type="button" class="tab-btn" data-view="back">Dos</button>
+                </div>
+                <svg id="bodymapFront" class="bodymap" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="body-part" data-part="Tête" cx="50" cy="18" r="14" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Cou" x="45" y="34" width="10" height="12" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Torse" x="38" y="50" width="24" height="35" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Abdomen" x="38" y="85" width="24" height="30" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Bras Gauche" x="18" y="52" width="10" height="40" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Bras Droit" x="72" y="52" width="10" height="40" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Cuisse Gauche" x="35" y="130" width="10" height="40" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Cuisse Droite" x="55" y="130" width="10" height="40" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Jambe Gauche" x="35" y="170" width="10" height="40" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Jambe Droite" x="55" y="170" width="10" height="40" fill="#e3f2fd"/>
+                </svg>
+                <svg id="bodymapBack" class="bodymap" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+                    <circle class="body-part" data-part="Arrière Tête" cx="50" cy="18" r="14" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Haut du Dos" x="38" y="50" width="24" height="20" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Milieu du Dos" x="38" y="70" width="24" height="20" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Bas du Dos" x="38" y="90" width="24" height="20" fill="#e3f2fd"/>
+                    <ellipse class="body-part" data-part="Fessier Gauche" cx="38" cy="120" rx="9" ry="12" fill="#e3f2fd"/>
+                    <ellipse class="body-part" data-part="Fessier Droit" cx="62" cy="120" rx="9" ry="12" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Mollet Gauche" x="35" y="170" width="10" height="40" fill="#e3f2fd"/>
+                    <rect class="body-part" data-part="Mollet Droit" x="55" y="170" width="10" height="40" fill="#e3f2fd"/>
+                </svg>
+                <div class="pain-list" id="painList"></div>
+            </div>
+
+            <!-- Sommeil -->
+            <div class="form-section">
+                <div class="section-title">Sommeil</div>
+                <div class="form-group">
+                    <label for="bedtime">Heure couché</label>
+                    <input type="time" id="bedtime" required>
+                </div>
+                <div class="form-group">
+                    <label for="sleep">Durée (heures)</label>
+                    <input type="number" id="sleep" min="0" max="12" step="0.5" required>
+                </div>
+                <div class="form-group">
+                    <label>Qualité</label>
+                    <div class="slider-box">
+                        <input type="range" id="sleepQuality" min="0" max="10" value="5">
+                        <span class="slider-value" id="sleepQualityVal">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hydratation -->
+            <div class="form-section">
+                <div class="section-title">Hydratation</div>
+                <div class="form-group">
+                    <label>Couleur urines</label>
+                    <div class="urine-grid">
+                        <div class="urine-option">
+                            <div class="urine-circle" data-urine="Incolore" style="background:#FFF; border:2px solid #ddd;"></div>
+                            <div class="urine-label">Blanc</div>
+                        </div>
+                        <div class="urine-option">
+                            <div class="urine-circle" data-urine="Pâle" style="background:#FFFACD;"></div>
+                            <div class="urine-label">Pâle</div>
+                        </div>
+                        <div class="urine-option">
+                            <div class="urine-circle" data-urine="Jaune" style="background:#FFEB3B;"></div>
+                            <div class="urine-label">Jaune</div>
+                        </div>
+                        <div class="urine-option">
+                            <div class="urine-circle" data-urine="Jaune Foncé" style="background:#FFA500;"></div>
+                            <div class="urine-label">Foncé</div>
+                        </div>
+                        <div class="urine-option">
+                            <div class="urine-circle" data-urine="Très Foncé" style="background:#CC8800;"></div>
+                            <div class="urine-label">T. Foncé</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Avez-vous soif ?</label>
+                    <div class="toggle-group">
+                        <button type="button" class="toggle-option" data-thirst="non">Non</button>
+                        <button type="button" class="toggle-option" data-thirst="oui">Oui</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit">Envoyer</button>
+                <button type="reset">Réinitialiser</button>
+            </div>
+            <div class="status" id="status"></div>
+        </form>
+    </div>
+
+    <!-- Modal Pain -->
     <div class="modal" id="painModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Ajouter une douleur</h3>
+                <h3>Détail de la douleur</h3>
                 <div class="modal-part" id="modalPart"></div>
             </div>
             <div class="modal-body">
-                <div style="margin-bottom: 15px;">
-                    <label>Intensité</label>
-                    <div class="intensity-options">
-                        <button type="button" class="intensity-btn" data-intensity="Légère">Légère</button>
-                        <button type="button" class="intensity-btn" data-intensity="Modérée">Modérée</button>
-                        <button type="button" class="intensity-btn" data-intensity="Vive">Vive</button>
-                    </div>
+                <label style="margin-top: 0;">Localisation précise</label>
+                <select id="painLocation" style="margin-bottom: 12px;">
+                    <option value="">Choisir...</option>
+                </select>
+
+                <label>Type de douleur</label>
+                <select id="painType" style="margin-bottom: 12px;">
+                    <option value="">Sélectionner...</option>
+                    <option value="Brûlure">Brûlure</option>
+                    <option value="Raideur">Raideur</option>
+                    <option value="Pincement">Pincement</option>
+                    <option value="Courbature">Courbature</option>
+                    <option value="Crampe">Crampe</option>
+                    <option value="Contusion">Contusion</option>
+                    <option value="Élancement">Élancement</option>
+                    <option value="Engourdissement">Engourdissement</option>
+                    <option value="Entorse">Entorse</option>
+                </select>
+
+                <label>Intensité : <span id="intensityDisplay">5</span>/10</label>
+                <div class="slider-box" style="margin-bottom: 12px;">
+                    <input type="range" id="painIntensity" min="0" max="10" value="5">
                 </div>
-                <label for="painComment">Commentaire</label>
-                <textarea id="painComment" placeholder="Décris la douleur..."></textarea>
+
+                <label>Commentaire (optionnel)</label>
+                <textarea id="painComment" placeholder="Détails supplémentaires..."></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-confirm" id="confirmPain">Ajouter</button>
@@ -771,12 +713,84 @@
         </div>
     </div>
 
+    <!-- Modal Instructions -->
+    <div class="modal instructions-modal" id="instructionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Comment utiliser l'app</h3>
+            </div>
+            <div class="instructions-list">
+                <div class="instruction-item">
+                    <strong>1. Sélectionne un joueur</strong><br>
+                    Chaque enregistrement est lié à un joueur spécifique.
+                </div>
+                <div class="instruction-item">
+                    <strong>2. Remplis l'état physique</strong><br>
+                    Évalue la fatigue, le stress et les courbatures sur une échelle de 0 à 10.
+                </div>
+                <div class="instruction-item">
+                    <strong>3. Marque les douleurs</strong><br>
+                    Clique sur les zones du corps où il y a de la douleur. Ajoute une intensité et un commentaire.
+                </div>
+                <div class="instruction-item">
+                    <strong>4. Informe-toi sur le sommeil</strong><br>
+                    Indique l'heure du coucher, la durée et la qualité du sommeil.
+                </div>
+                <div class="instruction-item">
+                    <strong>5. Hydratation</strong><br>
+                    Sélectionne la couleur des urines et indique si tu as soif.
+                </div>
+                <div class="instruction-item">
+                    <strong>6. Envoie les données</strong><br>
+                    Clique sur "Envoyer" pour enregistrer les données dans Google Sheets.
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 20px;">
+                <button type="button" class="btn-confirm" id="closeInstructions" style="flex: 1;">Compris</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDFTqqKf74f3SALExWD3OsZOmRTWuNvwZkLB0nvI-vt6R9ChUbq03OtI0nbiXDWxoq_Q/exec';
-
         const painData = new Map();
         let currentPainPart = null;
 
+        // Localisation détaillée par zone
+        const painLocations = {
+            'Tête': ['Avant', 'Arrière', 'Côté gauche', 'Côté droit', 'Temporale'],
+            'Cou': ['Avant', 'Arrière', 'Côté gauche', 'Côté droit'],
+            'Torse': ['Poitrine', 'Flanc gauche', 'Flanc droit'],
+            'Abdomen': ['Haut', 'Centre', 'Bas', 'Côté gauche', 'Côté droit'],
+            'Bras Gauche': ['Épaule', 'Bras', 'Coude', 'Avant-bras', 'Poignet'],
+            'Bras Droit': ['Épaule', 'Bras', 'Coude', 'Avant-bras', 'Poignet'],
+            'Cuisse Gauche': ['Cuisse haute', 'Cuisse basse', 'Genou'],
+            'Cuisse Droite': ['Cuisse haute', 'Cuisse basse', 'Genou'],
+            'Jambe Gauche': ['Mollet', 'Tibia', 'Cheville'],
+            'Jambe Droite': ['Mollet', 'Tibia', 'Cheville'],
+            'Arrière Tête': ['Nuque', 'Haut du crâne'],
+            'Haut du Dos': ['Entre omoplates', 'Épaule gauche', 'Épaule droite'],
+            'Milieu du Dos': ['Milieu gauche', 'Milieu centre', 'Milieu droit'],
+            'Bas du Dos': ['Bas gauche', 'Bas centre', 'Bas droit'],
+            'Fessier Gauche': ['Haut', 'Centre', 'Bas'],
+            'Fessier Droit': ['Haut', 'Centre', 'Bas'],
+            'Mollet Gauche': ['Haut', 'Centre', 'Bas'],
+            'Mollet Droit': ['Haut', 'Centre', 'Bas']
+        };
+
+        // Sliders
+        ['fatigue', 'stress', 'soreness', 'sleepQuality'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                document.getElementById(id + 'Val').textContent = this.value;
+            });
+        });
+
+        // Pain intensity slider
+        document.getElementById('painIntensity').addEventListener('input', function() {
+            document.getElementById('intensityDisplay').textContent = this.value;
+        });
+
+        // Tabs
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -788,28 +802,45 @@
             });
         });
 
-        ['fatigue', 'stress', 'soreness', 'sleepQuality'].forEach(id => {
-            document.getElementById(id).addEventListener('input', function() {
-                document.getElementById(id + 'Value').textContent = this.value;
-            });
-        });
-
+        // Body parts
         document.querySelectorAll('.body-part').forEach(part => {
             part.addEventListener('click', function(e) {
                 e.preventDefault();
                 currentPainPart = this.getAttribute('data-part');
                 document.getElementById('modalPart').textContent = currentPainPart;
                 document.getElementById('painComment').value = '';
-                document.querySelectorAll('.intensity-btn').forEach(b => b.classList.remove('active'));
+                document.getElementById('painType').value = '';
+                document.getElementById('painIntensity').value = '5';
+                document.getElementById('intensityDisplay').textContent = '5';
+                
+                // Remplir les options de localisation
+                const locationSelect = document.getElementById('painLocation');
+                locationSelect.innerHTML = '<option value="">Choisir...</option>';
+                if (painLocations[currentPainPart]) {
+                    painLocations[currentPainPart].forEach(loc => {
+                        const option = document.createElement('option');
+                        option.value = loc;
+                        option.textContent = loc;
+                        locationSelect.appendChild(option);
+                    });
+                }
+                
                 document.getElementById('painModal').classList.add('show');
             });
         });
 
         document.getElementById('confirmPain').addEventListener('click', () => {
-            const intensity = document.querySelector('.intensity-btn.active');
+            const location = document.getElementById('painLocation').value || 'Non spécifiée';
+            const type = document.getElementById('painType').value || 'Non spécifiée';
+            const intensity = document.getElementById('painIntensity').value;
             const comment = document.getElementById('painComment').value;
-            const fullDescription = intensity ? intensity.getAttribute('data-intensity') : 'Non spécifiée';
-            painData.set(currentPainPart, { intensity: fullDescription, comment: comment });
+            
+            painData.set(currentPainPart, {
+                location: location,
+                type: type,
+                intensity: intensity,
+                comment: comment
+            });
             updatePainList();
             document.getElementById('painModal').classList.remove('show');
         });
@@ -824,26 +855,34 @@
             painData.forEach((data, part) => {
                 const item = document.createElement('div');
                 item.className = 'pain-item';
-                let comment = data.intensity;
-                if (data.comment) comment += ` - ${data.comment}`;
+                let description = `${part} - ${data.location}`;
+                description += ` | ${data.type} | Intensité: ${data.intensity}/10`;
+                if (data.comment) description += ` | ${data.comment}`;
+                
                 item.innerHTML = `
-                    <div>
+                    <div class="pain-text">
                         <div class="pain-location">${part}</div>
-                        <div class="pain-comment">${comment}</div>
+                        <div class="pain-comment">${data.location} • ${data.type} • ${data.intensity}/10</div>
                     </div>
-                    <span class="pain-remove" onclick="painData.delete('${part}'); updatePainList();">×</span>
+                    <span class="pain-remove">×</span>
                 `;
+                item.querySelector('.pain-remove').addEventListener('click', () => {
+                    painData.delete(part);
+                    updatePainList();
+                });
                 list.appendChild(item);
             });
         }
 
-        document.querySelectorAll('.urine-circle').forEach(circle => {
-            circle.addEventListener('click', function() {
-                document.querySelectorAll('.urine-circle').forEach(c => c.classList.remove('selected'));
+        // Urine
+        document.querySelectorAll('.urine-circle').forEach(c => {
+            c.addEventListener('click', function() {
+                document.querySelectorAll('.urine-circle').forEach(x => x.classList.remove('selected'));
                 this.classList.add('selected');
             });
         });
 
+        // Toggle
         document.querySelectorAll('.toggle-option').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -852,11 +891,30 @@
             });
         });
 
-        document.getElementById('wellnessForm').addEventListener('submit', async function(e) {
+        // Info button
+        document.getElementById('infoBtn').addEventListener('click', () => {
+            document.getElementById('instructionsModal').classList.add('show');
+        });
+
+        document.getElementById('closeInstructions').addEventListener('click', () => {
+            document.getElementById('instructionsModal').classList.remove('show');
+        });
+
+        // Close modals on backdrop click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+        });
+
+        // Form submit
+        document.getElementById('form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const painList = Array.from(painData.entries()).map(([part, data]) => {
-                return `${part} (${data.intensity}${data.comment ? ': ' + data.comment : ''})`;
+                return `${part} - ${data.location} (${data.type}, intensité ${data.intensity}/10${data.comment ? ', ' + data.comment : ''})`;
             }).join('; ') || 'Aucune';
 
             const urine = document.querySelector('.urine-circle.selected')?.getAttribute('data-urine') || '';
@@ -878,40 +936,20 @@
             };
 
             try {
-                const response = await fetch(SCRIPT_URL, {
+                await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
-                showStatus('✓ Données envoyées !', 'success');
-                
-                document.getElementById('wellnessForm').reset();
-                document.getElementById('fatigueValue').textContent = '5';
-                document.getElementById('stressValue').textContent = '5';
-                document.getElementById('sorenessValue').textContent = '5';
-                document.getElementById('sleepQualityValue').textContent = '5';
-                document.querySelectorAll('.urine-circle').forEach(c => c.classList.remove('selected'));
-                document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
-                painData.clear();
-                updatePainList();
-
-                document.getElementById('timestamp').textContent = `Envoyé à ${new Date().toLocaleString('fr-FR')}`;
-
-            } catch (error) {
-                showStatus('❌ Erreur d\'envoi', 'error');
+                const status = document.getElementById('status');
+                status.textContent = '✓ Données envoyées';
+                status.classList.add('success');
+                setTimeout(() => status.classList.remove('success'), 3000);
+            } catch(err) {
+                console.error(err);
             }
         });
-
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('status');
-            statusDiv.textContent = message;
-            statusDiv.className = `status ${type}`;
-            if (type === 'success') {
-                setTimeout(() => { statusDiv.style.display = 'none'; }, 3000);
-            }
-        }
     </script>
 </body>
 </html>
