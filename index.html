@@ -170,6 +170,28 @@
             font-size: 16px;
         }
 
+        .slider-info-btn {
+            background: none;
+            border: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .slider-info-btn:hover {
+            transform: scale(1.15);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
         .tabs {
             display: flex;
             gap: 8px;
@@ -552,21 +574,30 @@
             <div class="form-section">
                 <div class="section-title">État Physique</div>
                 <div class="form-group">
-                    <label>Fatigue</label>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <label style="margin: 0;">Fatigue</label>
+                        <button type="button" class="slider-info-btn" data-info="fatigue" title="Info">ⓘ</button>
+                    </div>
                     <div class="slider-box">
                         <input type="range" id="fatigue" min="0" max="10" value="5">
                         <span class="slider-value" id="fatigueVal">5</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Stress</label>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <label style="margin: 0;">Stress</label>
+                        <button type="button" class="slider-info-btn" data-info="stress" title="Info">ⓘ</button>
+                    </div>
                     <div class="slider-box">
                         <input type="range" id="stress" min="0" max="10" value="5">
                         <span class="slider-value" id="stressVal">5</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Courbatures</label>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <label style="margin: 0;">Courbatures</label>
+                        <button type="button" class="slider-info-btn" data-info="soreness" title="Info">ⓘ</button>
+                    </div>
                     <div class="slider-box">
                         <input type="range" id="soreness" min="0" max="10" value="5">
                         <span class="slider-value" id="sorenessVal">5</span>
@@ -618,7 +649,10 @@
                     <input type="number" id="sleep" min="0" max="12" step="0.5" required>
                 </div>
                 <div class="form-group">
-                    <label>Qualité</label>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <label style="margin: 0;">Qualité</label>
+                        <button type="button" class="slider-info-btn" data-info="sleepQuality" title="Info">ⓘ</button>
+                    </div>
                     <div class="slider-box">
                         <input type="range" id="sleepQuality" min="0" max="10" value="5">
                         <span class="slider-value" id="sleepQualityVal">5</span>
@@ -751,10 +785,51 @@
         </div>
     </div>
 
+    <!-- Modal Slider Info -->
+    <div class="modal" id="sliderInfoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="sliderInfoTitle"></h3>
+            </div>
+            <div class="modal-body">
+                <div id="sliderInfoText" style="font-size: 14px; line-height: 1.6; color: #333;"></div>
+                <div style="margin-top: 16px; padding: 12px; background: #f0f4ff; border-left: 3px solid #667eea; border-radius: 4px; font-size: 13px;">
+                    <strong style="color: #667eea;">Échelle :</strong>
+                    <div style="margin-top: 6px;">0-3 : Faible</div>
+                    <div>4-6 : Modéré</div>
+                    <div>7-10 : Élevé</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-confirm" id="closeSliderInfo" style="flex: 1;">Fermer</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDFTqqKf74f3SALExWD3OsZOmRTWuNvwZkLB0nvI-vt6R9ChUbq03OtI0nbiXDWxoq_Q/exec';
         const painData = new Map();
         let currentPainPart = null;
+
+        // Explications des sliders
+        const sliderExplanations = {
+            'fatigue': {
+                title: 'Fatigue',
+                text: 'Évalue ton niveau de fatigue générale. Prends en compte la qualité de ton sommeil précédent, tes efforts physiques récents et ton état de récupération général. <strong>0 = Complètement reposé</strong> | <strong>10 = Épuisé</strong>'
+            },
+            'stress': {
+                title: 'Stress',
+                text: 'Évalue ton niveau de stress mental et émotionnel. Considère tes préoccupations professionnelles, personnelles ou sportives. <strong>0 = Totalement détendu</strong> | <strong>10 = Extrêmement stressé</strong>'
+            },
+            'soreness': {
+                title: 'Courbatures',
+                text: 'Évalue l\'intensité générale des courbatures (douleurs musculaires) ressenties dans le corps. Les courbatures sont les douleurs qui surviennent 24-48h après un effort intense. <strong>0 = Aucune courbature</strong> | <strong>10 = Courbatures très importantes</strong>'
+            },
+            'sleepQuality': {
+                title: 'Qualité du sommeil',
+                text: 'Évalue la qualité de ton dernier sommeil, en tenant compte de la facilité à t\'endormir, du nombre de réveils pendant la nuit, et de la sensation de repos à ton réveil. <strong>0 = Sommeil très mauvais</strong> | <strong>10 = Sommeil excellent</strong>'
+            }
+        };
 
         // Localisation détaillée par zone
         const painLocations = {
@@ -788,6 +863,22 @@
         // Pain intensity slider
         document.getElementById('painIntensity').addEventListener('input', function() {
             document.getElementById('intensityDisplay').textContent = this.value;
+        });
+
+        // Slider info buttons
+        document.querySelectorAll('.slider-info-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const infoKey = btn.getAttribute('data-info');
+                const info = sliderExplanations[infoKey];
+                document.getElementById('sliderInfoTitle').textContent = info.title;
+                document.getElementById('sliderInfoText').innerHTML = info.text;
+                document.getElementById('sliderInfoModal').classList.add('show');
+            });
+        });
+
+        document.getElementById('closeSliderInfo').addEventListener('click', () => {
+            document.getElementById('sliderInfoModal').classList.remove('show');
         });
 
         // Tabs
